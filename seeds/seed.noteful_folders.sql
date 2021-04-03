@@ -1,4 +1,4 @@
-INSERT INTO noteful_folders (title)
+INSERT INTO surf-jotz_folders (title)
 VALUES
   ('Important'),
   ('Super'),

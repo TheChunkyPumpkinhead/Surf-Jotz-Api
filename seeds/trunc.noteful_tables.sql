@@ -1,4 +1,4 @@
 TRUNCATE
-  noteful_notes,
-  noteful_notes
+  surf-jotz_notes,
+  surf-jotz_notes
   RESTART IDENTITY CASCADE;

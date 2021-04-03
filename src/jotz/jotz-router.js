@@ -2,88 +2,89 @@ const path = require('path');
 const express = require('express');
 const xss = require('xss');
 
-const NotesService = require('./notes-service');
 
-const NotesRouter = express.Router();
+const JotzService = require('./jotz-service');
+
+const JotzRouter = express.Router();
 const jsonParser = express.json();
 
-const serializeNote = note => ({
-  id: note.id,
-  date_published: note.date_published,
-  title: xss(note.title),
-  content: xss(note.content),
-folder_id: note.folder_id
+const serializeJotz = jotz => ({
+  id: jotz.id,
+  date_published: jotz.date_published,
+  title: xss(jotz.title),
+  content: xss(jotz.content),
+ city:xss(jotz.city),
 });
 
-NotesRouter
+JotzRouter
   .route('/')
   .get((req, res, next) => {
 
     const knexInstance = req.app.get('db');
-    NotesService.getAllNotes(knexInstance)
-      .then(notes => {
-        res.json(notes.map(serializeNote));
+    JotzService.getAllNotes(knexInstance)
+      .then(jotz => {
+        res.json(jotz.map(serializeJotz));
       })
       .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    const { title, content, folder_id} = req.body;
-    const newNote = { title, content, folder_id };
+    const { title, content, city} = req.body;
+    const newJotz = { title, content, city };
 
-    for (const [key, value] of Object.entries(newNote))
+    for (const [key, value] of Object.entries(newJotz))
       if (value == null)
         return res.status(400).json({
           error: { message: `Missing '${key}' in request body` }
         });
 
-    NotesService.insertNote(
+    JotzService.insertNote(
       req.app.get('db'),
-      newNote
+      newJotz
     )
-      .then(notes => {
+      .then(jotz => {
         console.log('req.originalUrl', req.originalUrl);
         res
           .status(201)
-          .location(path.posix.join(req.originalUrl, `/${notes.id}`))
-          .json(serializeNote(notes));
+          .location(path.posix.join(req.originalUrl, `/${jotz.id}`))
+          .json(serializeJotz(jotz));
       })
       .catch(next);
   });
 
-NotesRouter
-  .route('/:note_id')
+JotzRouter
+  .route('/:jotz_id')
   .all((req, res, next) => {
-    const { note_id } = req.params;
+    const { jotz_id } = req.params;
     const knexInstance = req.app.get('db');
-    NotesService.getById(knexInstance, note_id)
+    JotzService.getById(knexInstance, jotz_id)
       .then(note => {
         if (!note) {
           return res.status(404).json({
             error: { message: `Note Not Found` }
           });
         }
-        res.note = note;
+        res.jotz = jotz;
         next();
       })
       .catch(next);
   })
   .get((req, res, next) => {
-    res.json(serializeNote(res.note));
+    res.json(serializeJotz(res.jotz));
   })
   .delete((req, res, next) => {
-    const { note_id } = req.params;
+    const { jotz_id } = req.params;
     const knexInstance = req.app.get('db');
-    NotesService.deleteNote(knexInstance, note_id)
+    JotzService.deleteNote(knexInstance, jotz_id)
       .then(numRowsAffected => {
         res.status(204).end;
       })
       .catch(next);
   })
   .patch(jsonParser, (req, res, next) => {
-    const { title } = req.body;
-    const noteToUpdate = { title };
+    const { title,content,city } = req.body;
+    const jotzToUpdate = { title,content,city };
 
-    const numberOfValues = Object.values(noteToUpdate).filter(Boolean).length;
+    const numberOfValues = Object.values(jotzToUpdate).filter(Boolean).length;
     if (numberOfValues === 0)
       return res.status(400).json({
         error: {
@@ -91,10 +92,10 @@ NotesRouter
         }
       });
 
-    NotesService.updateNote(
+    JotzService.updateJotz(
       req.app.get('db'),
-      req.params.note_id,
-      noteToUpdate
+      req.params.jotz_id,
+      jotzToUpdate
     )
       .then(numRowsAffected => {
         console.log('numrows affected', numRowsAffected);
@@ -106,4 +107,4 @@ NotesRouter
 
 
 
-module.exports = NotesRouter;
+module.exports = JotzRouter;

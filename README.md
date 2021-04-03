@@ -1,5 +1,6 @@
-# noteful-api
-noteful-api!
+# surf-jotz-api
+
+surf-jotz-api!
 Scripts
 Start the application npm start
 
