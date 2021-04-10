@@ -4,7 +4,7 @@ const JotzService = {
     return knex.select('*').from('jotz');
   },
   //ASK MENTOR ABOUT THIS
-  insertNote(knex, newJotz) {
+  insertJotz(knex, newJotz) {
     return knex
       .insert(newJotz)
       .into('jotz')
@@ -16,13 +16,13 @@ const JotzService = {
 
   getById(knex, id) {
     return knex
-      .from('surf-jotz_notes')
+      .from('jotz')
       .select('*')
       .where('id', id)
       .first();
   },
 
-  deleteNote(knex, id) {
+  deleteJotz(knex, id) {
     return knex('jotz')
       .where({ id })
       .delete();

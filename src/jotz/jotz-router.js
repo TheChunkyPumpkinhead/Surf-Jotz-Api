@@ -21,7 +21,7 @@ JotzRouter
   .get((req, res, next) => {
 
     const knexInstance = req.app.get('db');
-    JotzService.getAllNotes(knexInstance)
+    JotzService.getAllJotz(knexInstance)
       .then(jotz => {
         res.json(jotz.map(serializeJotz));
       })
@@ -37,7 +37,7 @@ JotzRouter
           error: { message: `Missing '${key}' in request body` }
         });
 
-    JotzService.insertNote(
+    JotzService.insertJotz(
       req.app.get('db'),
       newJotz
     )
