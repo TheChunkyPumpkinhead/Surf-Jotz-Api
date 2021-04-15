@@ -71,9 +71,13 @@ date-created (auto generated)
 ## Screenshots 
 (Example) Landing Page
 :-------------------------:
-![Landing Page](/github-images/screenshots/landing-page-screenshot.png)
-Register Page
-![Register Page](/github-images/screenshots/register-page-screenshot.png)
+![AboutPage](/github-images/screenshots/about-screenshot.png)
+HomePage
+![HomePage](/github-images/screenshots/home-screenshot.png)
+CreatePage
+![CreatePage](/github-images/screenshots/create-screenshot.png)
+JotzPage
+![JotzPage](/github-images/screenshots/jotz-screenshot.png)
 
 ## Development Roadmap (to do later)
 This is v1.0 of the app, but future enhancements are expected to include:
