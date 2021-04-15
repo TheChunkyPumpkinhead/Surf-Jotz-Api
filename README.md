@@ -16,14 +16,22 @@ This app is for two types of user: a visitor and user
 * so I can decide if I want to use it
 
  ####     About Page
-as a logged in user
-I want to learn about what trigger point therapy is
-so I can treat my pain
+*as a visitor
+*I want to learn about whatSurf Jotz is
+so I can use it
+
+####  Create Page
+* as a user
+* I can record information
+
+####  Jotz Page
+* as a user
+* I can see the recorded information
 
 
 ## 3. Functionality 
 The app's functionality includes:
-*user can record information
+* User can record information
 
 ## 4. Technology 
 * Front-End: HTML5, CSS3, JavaScript ES6, React
@@ -43,27 +51,18 @@ The app's functionality includes:
 
 ## 7. Back-end Structure - Business Objects 
 * Users (database table)
-
-id (auto-generated)
-username (email validation)
-full name (first & last name)
-password (at least 8 chars, at least one alpha and a special character validation)
-(Trigger Points) Results (database table)
-
 id (auto-generated)
 image (image)
 title (note title)
 content (note text)
 date-created (auto generated)
-trigger_points_user (database table)
+
 
 id (auto-generated)
 user_id (foreign key to match users (id))
-trigger_points_id (foreign key to match trigger_points (id))
 Notes (database table)
 
 id (auto-generated)
-trigger_point_id(foreign key to match trigger point table (id))
 title (note title)
 content (note text)
 date-created (auto generated)
@@ -71,18 +70,18 @@ date-created (auto generated)
 ## Screenshots 
 (Example) Landing Page
 :-------------------------:
-![AboutPage](/github-images/screenshots/about-screenshot.png)
+![AboutPage](/github-images/screenshots/about.png)
 HomePage
-![HomePage](/github-images/screenshots/home-screenshot.png)
+![HomePage](/github-images/screenshots/home.png)
 CreatePage
-![CreatePage](/github-images/screenshots/create-screenshot.png)
+![CreatePage](/github-images/screenshots/create.png)
 JotzPage
-![JotzPage](/github-images/screenshots/jotz-screenshot.png)
+![JotzPage](/github-images/screenshots/jotz.png)
 
 ## Development Roadmap (to do later)
 This is v1.0 of the app, but future enhancements are expected to include:
-* Ability to delete saved notes
-*Ability to edit saved notes
+* Ability to delete saved jotz
+* Ability to edit saved jotz
 
 ## How to run it 
 Use command line to navigate into the project folder and run the following in terminal
