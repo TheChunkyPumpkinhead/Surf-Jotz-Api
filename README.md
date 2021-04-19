@@ -1,8 +1,8 @@
-# Capstone Project Title 
-This is an application for people topublicly document information about surfing. Users will be guided to an area to store thoughts and information.
+# Surf Jotz
+This is an application for people to publicly document information about surfing. Users will be guided to an area to store thoughts and information.
 
 ## 1. Working Prototype 
-(Example) You can access a working prototype of the React app here: https://surf-jotz-thechunkypumpkinhead.vercel.app/ and Node app here: https://your-app-server.herokuapp.com/
+(Example) You can access a working prototype of the React app here: https://surf-jotz-thechunkypumpkinhead.vercel.app/ and Node app here: https://surf-jotz.herokuapp.com/api/
 
 
 ## 2. User Stories
@@ -47,25 +47,27 @@ The app's functionality includes:
 **Home.js (stateful) -  ( image, title, content, )
 **About.js (stateless)
 **Navbar.js (stateful) - user table
-**Noteform.js (stateful) - jotz table ( title, content, date-created)
+**Jotzform.js (stateful) - jotz table ( title, content, date-created)
+**Jotzfolder.js (stateless) 
 
 ## 7. Back-end Structure - Business Objects 
-* Users (database table)
+*Jotz (database table)
 id (auto-generated)
-image (image)
+ date_published  (date)
 title (note title)
 content (note text)
-date-created (auto generated)
+city( text)
 
+/api 
+├── /
+│ └── get │
+│ └── post │
 
-id (auto-generated)
-user_id (foreign key to match users (id))
-Notes (database table)
+ ├── /:jotz_id 
+ │ └── get │
+│ └── delete │
+│ └── patch│
 
-id (auto-generated)
-title (note title)
-content (note text)
-date-created (auto generated)
 
 ## Screenshots 
 (Example) Landing Page

@@ -13,7 +13,7 @@ const serializeJotz = jotz => ({
   date_published: jotz.date_published,
   title: xss(jotz.title),
   content: xss(jotz.content),
- city:xss(jotz.city),
+  city: xss(jotz.city),
 });
 
 JotzRouter
@@ -28,7 +28,7 @@ JotzRouter
       .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    const { title, content, city} = req.body;
+    const { title, content, city } = req.body;
     const newJotz = { title, content, city };
 
     for (const [key, value] of Object.entries(newJotz))
@@ -57,10 +57,10 @@ JotzRouter
     const { jotz_id } = req.params;
     const knexInstance = req.app.get('db');
     JotzService.getById(knexInstance, jotz_id)
-      .then(note => {
-        if (!note) {
+      .then(jotz => {
+        if (!jotz) {
           return res.status(404).json({
-            error: { message: `Note Not Found` }
+            error: { message: `Jotz Not Found` }
           });
         }
         res.jotz = jotz;
@@ -74,15 +74,15 @@ JotzRouter
   .delete((req, res, next) => {
     const { jotz_id } = req.params;
     const knexInstance = req.app.get('db');
-    JotzService.deleteNote(knexInstance, jotz_id)
+    JotzService.deleteJotz(knexInstance, jotz_id)
       .then(numRowsAffected => {
         res.status(204).end;
       })
       .catch(next);
   })
   .patch(jsonParser, (req, res, next) => {
-    const { title,content,city } = req.body;
-    const jotzToUpdate = { title,content,city };
+    const { title, content, city } = req.body;
+    const jotzToUpdate = { title, content, city };
 
     const numberOfValues = Object.values(jotzToUpdate).filter(Boolean).length;
     if (numberOfValues === 0)
