@@ -3,7 +3,7 @@ const JotzService = {
   getAllJotz(knex) {
     return knex.select('*').from('jotz');
   },
-  //ASK MENTOR ABOUT THIS
+  
   insertJotz(knex, newJotz) {
     return knex
       .insert(newJotz)
